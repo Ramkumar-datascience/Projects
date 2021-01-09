@@ -1,0 +1,14 @@
+<form method="POST">
+
+  {# This hidden_tag is a CSRF security feature. #}
+  {{ form.hidden_tag() }}
+  {{ form.tag.label }} {{ form.tag() }}<br>
+  {{ form.question.label }} {{ form.question() }}<br>
+  {{ form.option_a.label }} {{ form.option_a() }}<br>
+  {{ form.option_b.label }} {{ form.option_b() }}<br>
+  {{ form.option_c.label }} {{ form.option_c() }}<br>
+  {{ form.option_d.label }} {{ form.option_d() }}<br>
+  {{ form.answer.label }} {{ form.answer() }}<br>
+  {{ form.submit() }}
+
+  </form>

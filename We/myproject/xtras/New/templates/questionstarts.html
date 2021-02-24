@@ -1,0 +1,162 @@
+<html>
+<head>
+	<title>Quiz Questions</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-grad-school.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		.logo img{
+			margin-top: 16px;
+		}
+		.quiz_questions_content{
+			max-width:70%;
+			margin: 148px auto;
+		}
+		 .quiz_alignment{
+			 max-width:75%;
+			 margin:auto;
+		}
+		 input[type=submit] {
+			width:30%;
+		}
+		.submit_next_button{
+			text-align:end;
+		}
+		<!-- timer -->
+		#timer{
+			color: white;
+			align-items: right;
+		}
+		#timer div {
+			display: inline-block !important;
+			min-width: 90px !important;
+
+		}
+
+
+		#status{
+			background-color: black;
+			border: 5px solid #cecece;
+			text-align: center;
+			color: white;
+			height: 65px;
+			width: 65px;
+			font-weight: bold;
+			font-size: xx-large;
+		}
+		.countstatus{
+			text-align: -webkit-right;
+			max-width: 84%;
+			position: relative;
+			top: 98px;
+		}
+		.timer_bg_color{
+			background-color: black;
+			padding: 10px;
+			border: 5px solid #cecece;
+			margin: 5px;
+			text-align: center;
+		}
+		#timer .timer_bg_color span{
+			color: white !important;
+		}
+
+		 input[type=submit] {
+			box-sizing:border-box;
+			padding:10px 0px;
+			margin-top:30px;
+			outline:none;
+			border:none;
+			background:#60adde;
+			opacity:0.7;
+			border-radius:20px;
+			font-size:20px;
+			color:#ffffff;
+		}
+		input[type=submit]:hover{
+			background:#003366;
+			opacity:0.7;
+		}
+		<!--
+		#timer div span {
+			color: #000000 !important;
+			display: block !important;
+			font-size: .35em !important;
+			font-weight: 400 !important;
+		}
+		-->
+		<!-- timer -->
+
+	</style>
+
+</head>
+
+
+<body>
+<script>
+function countDown(secs,elem) {
+	document.getElementById(elem).innerHTML = secs
+	if(secs < 1) {
+		clearTimeout(timer);
+		document.getElementById(elem).innerHTML = 'Exp';
+		window.location.href = "{{ url_for('quiz') }}";
+		return;
+
+	}
+	secs--;
+	var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+}
+</script>
+<div class="countstatus"><div id="status"></div></div>
+<script>countDown(50,"status");</script>
+
+ <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#">
+		<img src="{{ url_for('static', filename='logo.png') }}">
+	  </a>
+    </div>
+
+  </header>
+  <div id="timer" style="
+    position: relative;
+    font-size: xx-large;
+    font-weight: 600;
+    font-family: sans-serif;
+    top: 100px;
+    text-align: right;
+	color: white!important;
+	margin-right: 255px;"></div>
+
+  <div class="quiz_questions_content jumbotron">
+
+	<center><h1>Quiz Questions</h1></center>
+	<div class="quiz_alignment">
+
+	{% if n <= 5 %}
+		<form name="quiz" action="{{ url_for('quiz') }}" method="POST">
+		<b>Question {{ n }}.
+		<br>{{ ques[n-1] }}<br></b>
+		<blockquote>
+			<input type="radio" name="{{ n-1 }}" value="{{ op1[n-1] }}" class="radio_button_space">{{ op1[n-1] }}<br>
+			<input type="radio" name="{{ n-1 }}" value="{{ op2[n-1] }}" class="radio_button_space">{{ op2[n-1] }}<br>
+			<input type="radio" name="{{ n-1 }}" value="{{ op3[n-1] }}" class="radio_button_space">{{ op3[n-1] }}<br>
+			<input type="radio" name="{{ n-1 }}" value="{{ op4[n-1] }}" class="radio_button_space">{{ op4[n-1] }}<br>
+		</blockquote>
+
+
+			<div class="submit_next_button">
+			<input type="submit" value="Next">
+			</div>
+		</form>
+		{% else %}
+			<form action="{{ url_for('quiz')}}" method="POST">
+				<b>Are you sure, we should Submit</b>
+				<div class="submit_next_button">
+				<input type="submit" value="Next">
+				</div>
+			</form>
+		{% endif %}
+	</div>
+	</div>
+</body>
+</html>

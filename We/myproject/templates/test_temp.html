@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test page</title>
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">-->
+
+<style>
+	.test{
+		max-width:50%;
+		margin:auto;
+		margin-top:200px;
+		color:white;
+	}
+	body{
+		background-image: url(../images/courses-bg.jpg);
+		background-color: #172238;
+		background-repeat: no-repeat;
+		background-size: cover;
+		padding-bottom: 100px;
+	}
+	input[type=submit] {
+		width:30%;
+		box-sizing:border-box;
+		padding:10px 0px;
+		margin-top:30px;
+		outline:none;
+		border:none;
+		background:#60adde;
+		border-radius:10px;
+		font-size:20px;
+		color:#ffffff;
+	}
+	input[type=submit]:hover{
+		background:#003366;
+	}
+	.sumbit_clickbutton{
+		cursor: pointer;
+	}
+	.exam{
+		padding-bottom: 15px;
+	}
+	.continue{
+		text-align:center;
+	}
+	@media (max-width: 950px){
+		input[type=submit] {
+			text-align:center;
+			width:100%;
+			font-size:15px;
+	}
+	}
+	.logo img{
+		 width:250px;
+	 }
+	 .main-header {
+		background-color: rgba(22,34,57,0.95);
+		height: 80px;
+		position: fixed;
+		z-index: 12;
+		width: 100%;
+		top: 0;
+	}
+
+	.main-header .logo {
+		float: left;
+		line-height: 80px;
+		padding-left: 60px;
+	}
+
+	.main-header .logo a {
+		font-size: 36px;
+		text-transform: uppercase;
+		font-weight: 800;
+		color: #fff;
+	}
+	.test h1{
+		font-size: 50px;
+		}
+</style>
+</head>
+<body>
+
+	<header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#">
+		<img src="{{ url_for('static', filename='logo.png') }}">
+	  </a>
+    </div>
+	</header>
+	<div class="test">
+		<center><h1>Quiz Summery</h2></center>
+					<ol>
+
+					<li class="exam">PYTHON Qiuz contians</li>
+					<ul>
+					<li class="exam">20 multiple choice questions</li>
+					<li class="exam">50 sec per question</li></ul>
+					<li class="exam">Before you start You must complete this assessment in one session — make sure your internet is reliable.</li>
+					<li class="exam">If you don’t earn a certificate this time, you can retake this assessment again after 7 days.</li>
+					<li>We won’t show your results to anyone without your permission.</li>
+					</ol>
+			<div class="continue">
+		<a href="{{ url_for('verify') }}"><input type="submit" value="Start the Exam" class="sumbit_clickbutton"></a></div>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('beforeunload', function () {
+            $("input[type=submit], input[type=button]").prop("disabled", "disabled");
+        });
+    </script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>
+		Congratulations page
+	</title>
+	<style>
+	body{
+		margin:0px;
+	}
+	.site-header{
+		text-align:center;
+		margin-top:165px;:
+	}
+
+	.tick_alignment img{
+		height: 65px;
+	}
+	h1{
+		font-size:40px;
+	}
+	 .main-header {
+		background-color: rgba(22,34,57,0.95);
+		height: auto;
+		position: fixed;
+		z-index: 12;
+		width: 100%;
+		top: 0;
+	}
+	.logo img{
+		max-width: 45%;
+		margin-top: 4px;
+	}
+	.main-content p{
+		margin-top: 20px;
+		font-size:20px;
+		max-width: 80%;
+		margin: auto;
+	}
+	.icons{
+		text-align: end;
+
+		width: 68%;
+	}
+	.icons p{
+		font-size:x-large;
+		width: 92%;
+		float: left;
+	}
+	.icons img{
+		width: 37px;
+		float: right;
+		margin-top: 17px;
+		}
+	.certificate_img img{
+		max-width:35%;
+	}
+	#status{
+		margin-top:159px;
+	}
+
+	.certificate_img {
+		position: relative;
+		text-align: center;
+	}
+	.certificate_img h3{
+		font-size: 23px;
+		font-family: Brush Script MT;
+		color: red;
+		font-weight: 100;
+		}
+			@media (max-width:900px){
+				.certificate_img h3{
+				font-size: x-small;
+				}
+				.centered {
+				   position: absolute;
+				   top: 49%;
+				}
+			}
+	.centered {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -186%);
+	}
+	</style>
+</head>
+<body>
+<header class="main-header clearfix" role="header">
+    <div class="logo">
+     <center> <a href="#">
+		<img src="{{ url_for('static', filename='logo.png') }}">
+	  </a></center>
+    </div>
+</header>
+  	<div class="site-header">
+  		<!--<h1>CONGRATULATIONS!</h1>-->
+  		<div class="main-content">
+  			<div class="tick_alignment"><img src="{{ url_for('static', filename='tick.jpg') }}"></div>
+  			<!--<p>Your Exam completed successfully. Your profeciency level is <h2 style="color:green">{{ remark }}</h2></p>-->
+						<p>Your Exam completed successfully. You doesn't meet our requirements... <h2 style="color:green">{{ remark }}</h2></p>
+      {% if count > 13 %}
+			<h1>CONGRATULATIONS!</h1>
+  			<div class="certificate_img">
+  				<a href="./certificate.jpg" download><img src="{{ url_for('static', filename='certificate.jpg') }}" name='#down'></a>
+  				<h3 class="centered">{{ current_user.username }}</h3>
+  			</div>
+
+      		</div>
+      	</div>
+
+      	<div class="icons">
+      		<p>Would you like to share in:</p>
+      		<a href="https://www.linkedin.com/"><img src="{{ url_for('static', filename='linkedin.png') }}" style="width: 39px; cursor: pointer;"></a>
+      	</div>
+      {% endif %}
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>History</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+	body{
+	font-family: Arial;
+	}
+	.wrap{
+		max-width:55%;
+		border-radius:20px;
+		margin:auto;
+		background:rgba(0,0,0,0.8);
+		box-sizing:border-box;
+		padding:40px;
+		color:#fff;
+		margin-top:200px;
+	}
+	h2,p{
+		text-align: center;
+	}
+	.logo{
+		width:100%;
+	}
+	 .logo img{
+		 width:250px;
+	 }
+	 .main-header {
+		background-color: rgba(22,34,57,0.95);
+		height: 80px;
+		position: fixed;
+		z-index: 12;
+		width: 100%;
+		top: 0;
+	}
+
+	.main-header .logo {
+		float: left;
+		line-height: 80px;
+		padding-left: 60px;
+	}
+
+	.main-header .logo a {
+		font-size: 36px;
+		text-transform: uppercase;
+		font-weight: 800;
+		color: #fff;
+	}
+	body{
+		background-color: #172238;
+		background-repeat: no-repeat;
+		background-size: cover;
+		padding-bottom: 100px;
+	}
+	.table_text{
+		border: 1px solid white;
+		padding: 18px 51px;
+		font-weight:200;
+	}
+	.table-striped{
+		width:100%;
+		color:slategrey;
+		text-align: center;
+		font-weight: bold;
+		border: 4px solid white;
+	}
+
+</style>
+</head>
+<body>
+
+	<header class="main-header clearfix" role="header">
+		<div class="logo">
+		  <a href="#">
+			<img src="{{ url_for('static', filename='logo.png') }}" >
+		  </a>
+		  <a href="{{ url_for('logout')}}"><p style="float: right; color: white; margin-right: 150px; cursor: pointer;" >Logout</p></a>
+		</div>
+	  </header>
+	<div class="wrap">
+		<h2>Previous test results for {{ current_user.username }}</h2><br>
+		 <table class="table table-striped">
+
+       {% for result in results %}
+       <tr>
+        <td>You scored {{ result.score }} in the test attempted on: {{ result.attempted_on.strftime('%Y-%m-%d') }} for the module {{ result.tag }}</td>
+
+      </tr>
+      {% endfor %}
+  </table>
+
+
+	</div>
+</body>
+</html>

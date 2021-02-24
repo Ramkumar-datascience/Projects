@@ -1,0 +1,15 @@
+{% for row in query %}
+<tr>
+  <td>
+    Question: {{ row.question }}
+  </td>
+</tr>
+<br />
+<tr>
+  <td>
+    Answer: {{ row.answer }}
+  </td>
+</tr>
+<br />
+<br />
+{% endfor %}

@@ -1,0 +1,5 @@
+<h1>Previous test results for {{ current_user.username }}</h1>
+{% for result in results %}
+  <p>You scored {{ result.score }} in the test attempted on: {{ result.attempted_on.strftime('%Y-%m-%d') }} for the module {{ result.tag }}</p>
+  <br>
+{% endfor %}

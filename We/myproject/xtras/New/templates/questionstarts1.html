@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Quiz Questions</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-grad-school.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		.logo img{
+			margin-top: 16px;
+		}
+		
+		.quiz_questions_content{
+			 margin-top:230px;
+		 }
+		 input[type=submit] {
+			width:100%;
+			box-sizing:border-box;
+			padding:10px 0px;
+			margin-top:30px;
+			outline:none;
+			border:none;
+			background:#60adde;
+			opacity:0.7;
+			border-radius:20px;
+			font-size:20px;
+			color:#ffffff;
+		}
+		input[type=submit]:hover{
+			background:#003366;
+			opacity:0.7;
+		}
+		.radio_button_space{
+					margin:0 8px 0 14px;
+				}
+				
+		 .quiz_alignment{
+			 max-width:50%;
+			 margin:auto;
+		 }
+	</style>
+</head>
+
+<body>
+ <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#">
+		<img src="{{ url_for('static', filename='logo.png') }}">
+	  </a>
+    </div>
+    
+  </header>
+  <div class="quiz_questions_content jumbotron">
+	<center><h1>Quiz Questions</h1></center>
+	<div class="quiz_alignment">
+		<form name="quiz">
+		<b>Question : 
+		<br>{{ data }}<br></b>
+		<blockquote>
+			<input type="radio" name="q1" value="don't like" class="radio_button_space">{{ op1 }}<br>
+			<input type="radio" name="q1" value="doesn't like" class="radio_button_space">{{ op2 }}<br>
+			<input type="radio" name="q1" value="doesn't likes" class="radio_button_space">{{ op3 }}<br>
+			<input type="radio" name="q1" value="doesn't likes" class="radio_button_space">{{ op4 }}<br>
+		</blockquote>
+		<input type="submit" value="Next">
+		</form>
+	</div>
+	</div>
+</body>
+</html>

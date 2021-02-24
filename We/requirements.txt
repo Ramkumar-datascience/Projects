@@ -1,0 +1,11 @@
+flask
+
+flask_sqlalchemy
+
+Flask-Migrate
+
+flask_login
+
+flask_wtf
+
+email_validator

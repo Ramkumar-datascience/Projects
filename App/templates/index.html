@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main-div{
+    display: block;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid black;
+    border-width: 3px;
+    box-shadow: 6px 6px 4px grey;
+    max-width: auto;
+    max-width: 50%;
+    margin: 0px auto;
+}
+#mail-input,#password-input,#subject-input{
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    width: 270px;
+    border: 1px solid brown;
+    outline: none;
+    border-width: 1px;
+}
+#content-input{
+    padding: 20px;
+    margin: 20px;
+    width: 270px;
+    height: 270px;
+    border: 1px solid brown;
+    border-radius: 20px;
+    border-width: 1px;
+    outline: none;
+}
+#file-input{
+    background-color: lightblue;
+    border-radius: 20px;
+    font: sans-serif;
+    font-size: large;
+    height: 50px;
+    width: 130px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#submit{
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+    font: sans-serif;
+    font-size: large;
+    height: 50px;
+    width: 130px;  
+    cursor: pointer;
+}
+#buttons{
+    justify-content: center;
+    display: flex;
+    padding-bottom: 30px;
+
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+textarea{
+    padding: 10px;
+    margin: 20px;
+    width: 270px;
+    border: 1px solid brown;
+}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; font-family: sans-serif; color: brown;">Mail Automation</h1>
+	<form action = "{{ url_for('importCsv') }}" method = 'POST'>
+		<div id="main-div">
+		<input type="mail" name="sender" id="mail-input" placeholder="Enter your E-mail">
+		<br>
+		<input type="password" name="password" id="password-input" placeholder="Enter your password">
+		<br>
+		<input type="subject" name="subject" id="subject-input" placeholder="Enter Subject">
+		<br>
+		<textarea type="text" name="mailbody" rows="4" cols="50" placeholder="Mail Body">
+  
+  </textarea>
+		<br>
+		
+		<div class="upload-btn-wrapper">
+		  <button class="btn">Import</button>
+		  <input type="file" name = "upload-file" />
+		  
+		</div><br>
+		<button type="submit" id="submit">Send</button>
+		</div>
+	</form>
+	
+	<form action = "{{ url_for('mail_with_names') }}" method = 'POST'>
+		<div id="main-div">
+		<input type="mail" name="sender" id="mail-input" placeholder="Enter your E-mail">
+		<br>
+		<input type="password" name="password" id="password-input" placeholder="Enter your password">
+		<br>
+		<input type="subject" name="subject" id="subject-input" placeholder="Enter Subject">
+		<br>
+		<div class="upload-btn-wrapper">
+		  <button class="btn">Mail Body</button>
+		  <input type="file" name = "upload-body" />
+		  
+		</div><br>
+		<br>
+		
+		<div class="upload-btn-wrapper">
+		  <button class="btn">Import</button>
+		  <input type="file" name = "upload-file" />
+		  
+		</div><br>
+		<button type="submit" id="submit">Send</button>
+		</div>
+	</form>
+</body>
+</html>
+
+<!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}"> -->

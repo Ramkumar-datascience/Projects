@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>Innomatics dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+
+input[type=text],
+input[type=password],
+input[type=email],
+textarea{
+  border: none;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button-cls{
+  margin-top: 30px;
+}
+.button-cls button{
+  background: green;
+    padding: 7px 50px;
+    color: white;
+    font-weight: bold;
+    border-radius: 28px;
+}
+.w3-padding{
+    text-align: center;
+    background: #ccc;
+    margin: 0 -73px;
+}
+.w3-container{
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="w3-sidebar w3-bar-block w3-black w3-card" style="width:19%">
+  <h5 class="w3-bar-item"><img src="{{ url_for('static', filename='images/logo.png') }}" style="width: 100%;"></h5>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade')">Common Content</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade1')">Name & Certificate</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade2')">Name With Common Certificate</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade3')">Mail 4</button>
+</div>
+
+<div style="margin-left:20%">
+  <div class="w3-padding"><span style="font-weight:bold; font-size: 30px;">MAIL AUTOMATION</span></div>
+
+  <div id="Fade" class="w3-container city w3-animate-opacity">
+    <h2 style="max-width:50%; margin: auto;">Common Content</h2>
+    <div class="row">
+      <div class="col-lg-12 col-xlg-12">
+          <div class="card">
+              <div class="card-body" style="width: 50%; margin: auto;">
+                  <form class="form-horizontal form-material mx-2" action = "{{ url_for('text_mail') }}" method = 'POST'>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="email" name="sender" placeholder="Your Mail Id" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="password" value="password" name="password"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="text" name="subject" placeholder="Mail Subject"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-12">Message</label>
+                          <div class="col-md-12">
+                              <textarea rows="5" name="mailbody" class="form-control form-control-line"></textarea>
+                          </div>
+                      </div>
+                      <div class="form-group" style="text-align: center;">
+                        <div class="col-sm-12" style="display: flex;">
+                        <div class="form-group" style="margin-right:10px;">
+                            <input class="form-control" type="file" name = "upload-file" />
+                        </div>
+                    </div>
+                        <div class="col-sm-12 button-cls">
+                            <button class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+					{{ confirm }}
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <div id="Fade1" class="w3-container city w3-animate-opacity" style="display:none">
+    <h2 style="max-width:50%; margin: auto;">Name & Certificate</h2>
+    <div class="row">
+    <div class="col-lg-12 col-xlg-12">
+        <div class="card">
+            <div class="card-body" style="width: 50%; margin: auto;">
+                <form class="form-horizontal form-material mx-2" action = "{{ url_for('mail_with_names') }}" method = 'POST'>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="email" name="sender" placeholder="Your Mail Id" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="password" value="password" name="password"
+                                class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" name="subject" placeholder="Mail Subject"
+                                class="form-control form-control-line">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="text-align: center;">
+                      <div class="col-sm-12" style="display: flex;">
+                      <div class="form-group" style="margin-right:10px;">
+                          <input class="form-control" type="file" name = "upload-body"/>
+                      </div>
+                      
+                      <div class="form-group">
+                          <input class="form-control" type="file" name = "upload-file"/>
+                      </div>
+                  </div>
+                      <div class="col-sm-12 button-cls">
+                          <button class="btn btn-success">Send</button>
+                      </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div id="Fade2" class="w3-container city w3-animate-opacity" style="display:none">
+    <h2 style="max-width:50%; margin: auto;">Name With Common File</h2>
+    <div class="row">
+      <div class="col-lg-12 col-xlg-12">
+          <div class="card">
+              <div class="card-body" style="width: 50%; margin: auto;">
+                  <form class="form-horizontal form-material mx-2" action = "{{ url_for('mailing') }}" method = 'POST'>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="email" name="sender" placeholder="Your Mail Id" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="password" value="password" name="password"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="text" name="subject" placeholder="Mail Subject"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group" style="text-align: center;">
+                      <div class="col-sm-12" style="display: flex;">
+                      <div class="form-group" style="margin-right:10px;">
+                          <input class="form-control" type="file" name = "upload-body"/>
+                      </div>
+                      <div class="form-group" style="text-align: center;">
+                        <div class="col-sm-12" style="display: flex;">
+                        <div class="form-group" style="margin-right:10px;">
+                            <input class="form-control" type="file" name = "upload-file"/>
+                        </div>
+                    </div>
+                        <div class="col-sm-12 button-cls">
+                            <button class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <div id="Fade3" class="w3-container city w3-animate-opacity" style="display:none">
+    <h2 style="max-width:50%; margin: auto;">Mail 4</h2>
+    <div class="row">
+      <div class="col-lg-12 col-xlg-12">
+          <div class="card">
+              <div class="card-body" style="width: 50%; margin: auto;">
+                  <form class="form-horizontal form-material mx-2">
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="email" name="sender" placeholder="Your Mail Id" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="password" value="password" name="password"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-12">
+                              <input type="text" name="subject" placeholder="Mail Subject"
+                                  class="form-control form-control-line">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-12">Message</label>
+                          <div class="col-md-12">
+                              <textarea rows="5" name="mailbody" class="form-control form-control-line"></textarea>
+                          </div>
+                      </div>
+                      <div class="form-group" style="text-align: center;">
+                        <div class="col-sm-12" style="display: flex;">
+                        <div class="form-group" style="margin-right:10px;">
+                            <input class="form-control" type="file" name = "upload-file"/>
+                        </div>
+                    </div>
+                        <div class="col-sm-12 button-cls">
+                            <button class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+ 
+
+</div>
+
+<script>
+function openLink(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
+
+</body>
+</html>

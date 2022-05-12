@@ -1,0 +1,9 @@
+table{
+    border: 1px solid black;
+    width: 150px !important;
+  }
+.original1{
+    background-origin: padding-box;
+    width: 150px !important;
+    color: blue;
+}

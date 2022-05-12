@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+History Page
+    
+{% endblock %}
+
+{% block body %}
+
+<style>
+table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 1000px;
+    table-layout: fixed;
+    border: 1px solid blue;
+
+}
+thead{
+    background-color:#009879;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border:2px solid red;
+}
+.original1{
+    word-wrap: break-word;
+    padding: 12px 15px;
+    border: 1px solid black;
+}
+.shortened1{
+    text-align: center;
+    border: 1px solid black;
+}
+
+</style>
+<h1>Hisotry of Shortened URLs</h1>
+<table>
+<thead>
+<tr>
+<th >Original URL </th>
+<th> Shortened UrL </th>
+</tr>
+</thead>
+
+{% for i in data %}
+        <tr>
+            <td class = "original1">{{i.original}} </td>
+            <td class ="shortened1"><b>127.0.0.1:5000:/sh/{{i.Shortened}}</b></td>
+        </tr>
+{% endfor %}
+
+<br>
+</table>
+
+
+{% endblock %}

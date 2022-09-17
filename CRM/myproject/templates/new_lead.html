@@ -1,0 +1,18 @@
+
+<div class="wrap">
+  <h2>Add New Lead </h2>
+<form action = "{{ url_for('newLead') }}" method="POST">
+
+  {# This hidden_tag is a CSRF security feature. #}
+  {{ form.hidden_tag() }}
+  {{ form.fullname.label }} {{ form.fullname() }}<br>
+  {{ form.email.label }} {{ form.email() }}<br>
+  {{ form.mobile.label }} {{ form.mobile() }}<br>
+  {{ form.leadfrom.label }} {{ form.leadfrom() }}<br>
+  {{ form.handleby.label }} {{ form.handleby() }}<br>
+
+  {{ form.submit() }}
+
+  </form>
+
+</div>

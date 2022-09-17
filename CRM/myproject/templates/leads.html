@@ -1,0 +1,248 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<h1>Leads Information</h1>
+
+
+<button type='submit' class="btn btn-primary" data-toggle="modal" data-target="#mymodal">Add Lead</button>
+<br/><br/>
+<form action = "{{ url_for('importCsv') }}" method = 'POST'>
+<input type='file' class="btn btn-primary" name = "upload-file">
+<button type='submit' class="btn btn-primary">Import</button>
+</form>
+<!--Search Option-->
+
+   <!-- <form>
+    <input type="text" name="tag" id="tag"  placeholder="Enter keyword"/>
+    <button type='submit' class="btn btn-primary">Search</button>
+   </form> -->
+
+<!--Search Option end-->
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title">Add Lead</h4>
+         </div>
+         <div class="modal-body">
+            <form action="{{url_for('newLead')}}" method="POST">
+              <div class="form-group">
+
+
+                 <input type="text" class="form-control" name="fullname" placeholder="Fullname"">
+              </div>
+               <div class="form-group">
+
+                 <input type="email" class="form-control" name="email" placeholder="Email">
+              </div>
+               <div class="form-group">
+
+                 <input type="text" class="form-control" name="mobile" placeholder="Mobile">
+              </div>
+              <div class="form-group">
+
+                <input type="text" class="form-control" name="leadfrom" placeholder="Lead From">
+             </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="handleby" placeholder="Handle By">
+             </div>
+             <div class="form-group">
+               <input type="text" class="form-control" name="status" placeholder="Status">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="comment" placeholder="Add YOur Comment">
+           </div>
+               <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Add</button>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<form method = "POST" action = '{{ url_for("delete_lead")}}'>
+  <button type='submit'class="btn btn-danger" onclick="return confirm('Are You Sure To Delete ?')">Delete Lead</button>
+  <input type="text" name="tag" id="tag"  placeholder="Enter keyword to search" class="p-1 mb-2 bg-dark text-white"/>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+
+      <th scope="col">Email</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Lead From</th>
+      <th scope="col">Handle BY</th>
+      <th scope="col">Staus</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody id = 'search_table'>
+    {% for row in lead.items %}
+    <tr>
+      <td><input type="checkbox" name = "leadcheckbox" value = "{{ row.id }}"></td>
+
+      <td>{{ row.email }}</td>
+      <td><a href = "#" data-toggle="modal" data-target="#leadmodal{{row.id}}">{{ row.fullname }}</a></td>
+      <td>{{ row.mobile }}</td>
+      <td>{{ row.leadfrom }}</td>
+      <td>{{ row.handleby }}</td>
+      <td>{{ row.status }}</td>
+      <td>{{ row.comment }}</td>
+      <td><a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a></td>
+    </tr>
+
+
+
+    <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+
+                <h4 class="modal-title">Edit Employee</h4>
+             </div>
+             <div class="modal-body">
+                <form action="{{  url_for('update_lead') }}" method="POST">
+                   <div class="form-group">
+                      <label>FullName:</label>
+                      
+                      <input type="hidden"  name="id" value="{{row.id}}">
+                      <input type="text" class="form-control" name="fullname" value="{{row.fullname}}"">
+                   </div>
+                    <div class="form-group">
+                      <label>Email:</label>
+                      <input type="email" class="form-control" name="email" value="{{row.email}}">
+                   </div>
+                    <div class="form-group">
+                      <label>Phone:</label>
+                      <input type="number" class="form-control" name="mobile" value="{{row.mobile}}">
+                   </div>
+                   <div class="form-group">
+                     <label>Lead From:</label>
+                     <input type="text" class="form-control" name="leadfrom" value="{{row.leadfrom}}">
+                  </div>
+                   <div class="form-group">
+                     <label>Handle By:</label>
+                     <input type="text" class="form-control" name="handleby" value="{{row.handleby}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Status:</label>
+                    <input type="text" class="form-control" name="status" value="{{row.status}}">
+                 </div>
+                 <div class="form-group">
+                   <label>Comment:</label>
+                   <input type="text" class="form-control" name="comment" value="{{row.comment}}">
+                </div>
+                   <div class="form-group">
+                      <button class="btn btn-primary" type="submit">Update</button>
+                   </div>
+                </form>
+
+             </div>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <div id="leadmodal{{row.id}}" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <h4 class="modal-title">Lead Details</h4>
+             </div>
+             <div class="modal-body">
+                <form action="#" method="POST">
+                   <div class="form-group">
+                      <label><b>FullName:</b> </label>  {{ row.fullname }}
+                   </div>
+                    <div class="form-group">
+                      <label><b>Email:</b> </label>  {{ row.email }}
+                   </div>
+                    <div class="form-group">
+                      <label><b>Phone: </b></label>  {{ row.mobile }}
+                   </div>
+                   <div class="form-group">
+                     <label><b>Lead From:</b> </label>  {{ row.leadfrom }}
+                  </div>
+                   <div class="form-group">
+                     <label><b>Handle By:</b> </label>  {{ row.handleby }}
+                  </div>
+                  <div class="form-group">
+                    <label><b>Status:</b> </label>  {{ row.status }}
+                 </div>
+                 <div class="form-group">
+                   <label><b>Comment:</b> </label>  {{ row.comment }}
+                </div>
+                </form>
+             </div>
+             </div>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             </div>
+          </div>
+       </div>
+    </div>
+    {% endfor %}
+    </table>
+</form>
+    <!-- Pagination Links-->
+<div class="text-right" style="margin-right:20px;">
+    <a href="{{ url_for('page', page=lead.prev_num) }}"
+       class="btn btn-outline-dark
+       {% if lead.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+<!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in lead.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    <!-- Check for the active page and set the link to "Active"-->
+      {% if lead.page == page_num %}
+      <a href="{{ url_for('page', page=page_num) }}"
+         class="btn btn-dark">
+          {{ page_num }}
+      </a>
+      {% else %}
+      <a href="{{ url_for('page', page=page_num) }}"
+         class="btn btn-outline-dark">
+          {{ page_num }}
+      </a>
+      {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+        {% endfor %}
+        <a href="{{ url_for('page', page=lead.next_num) }}"
+           class="btn btn-outline-dark
+           {% if lead.page == lead.pages %}disabled{% endif %}">
+            &raquo;
+        </a>
+    </div>
+<p class="text-right mt-3" style="margin-right:20px;">
+   Showing page {{ lead.page }} of {{ lead.pages }}
+</p>
+
+
+<script>
+    $(document).ready(function() {
+        $("#tag").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#search_table tr").filter(function() {
+                $(this).toggle($(this).text()
+                .toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>

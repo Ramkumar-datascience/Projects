@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration form</title>
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
+
+<style>
+	body{
+		font-family: Arial;
+	}
+	.wrap{
+		max-width:350px;
+		border-radius:20px;
+		margin:auto;
+		background:rgba(0,0,0,0.8);
+		box-sizing:border-box;
+		padding:40px;
+		color:#fff;
+		margin-top:200px;
+	}
+	h2{
+		text-align: center;
+	}
+	input[type=text],input[type=password]{
+		width:100%;
+		box-sizing:border-box;
+		padding:12px 5px;
+		background:rgba(0,0,0,0.10);
+		outline:none;
+		border:none;
+		border-bottom:1px dotted #fff;
+		color:#fff;
+		border-radius:5px;
+		margin:5px;
+		font-weight:bold;
+	}
+	input[type=submit] {
+		width:100%;
+		box-sizing:border-box;
+		padding:10px 0px;
+		margin-top:30px;
+		outline:none;
+		border:none;
+		background:#60adde;
+		opacity:0.7;
+		border-radius:20px;
+		font-size:20px;
+		color:#ffffff;
+	}
+	input[type=submit]:hover{
+		background:#003366;
+		opacity:0.7;
+	}
+
+		.logo img{
+		 width:250px;
+	 }
+	 .main-header {
+		background-color: rgba(22,34,57,0.95);
+		height: 80px;
+		position: fixed;
+		z-index: 12;
+		width: 100%;
+		top: 0;
+	}
+
+	.main-header .logo {
+		float: left;
+		line-height: 80px;
+		padding-left: 60px;
+	}
+
+	.main-header .logo a {
+		font-size: 36px;
+		text-transform: uppercase;
+		font-weight: 800;
+		color: #fff;
+	}
+	body{
+		background-image: url(../images/courses-bg.jpg);
+		background-color: #172238;
+		background-repeat: no-repeat;
+		background-size: cover;
+		padding-bottom: 100px;
+	}
+	.sumbit_clickbutton{
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+	<header class="main-header clearfix" role="header">
+
+	  </header>
+	<div class="wrap">
+		<h2>Register Here</h2>
+		{{ msg }}
+	<form action = "{{ url_for('register') }}" method="POST">
+
+		{# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    {{ form.email.label }} {{ form.email() }}<br>
+    {{ form.username.label }} {{ form.username() }}<br>
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.pass_confirm.label }} {{ form.pass_confirm() }}<br>
+
+    {{ form.submit() }}
+
+		</form>
+	</div>
+
+</body>
+</html>

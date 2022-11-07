@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome</title>
+  <style type="text/css">
+  	body{
+			background: rgb(247, 198, 240);
+		}
+    h1{
+      text-align:center;
+      color: rgb(15, 14, 48);
+      margin-top: 60px;
+    }
+    
+
+    *{font-family: 'Roboto', sans-serif;}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: rgb(145, 235, 56);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 1rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+.radiobuttons{
+  margin-left: 200px;
+}
+input[type=submit]{
+      background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 250px;
+      margin-top: 30px;
+    }
+    input[type=submit]:hover{
+      background-color: rgb(232, 152, 245);
+    }
+    .result{
+      margin-left: 750px;
+      margin-top: -460px;
+    }
+</style>
+</head>
+
+<body>
+<h1>Data Science Automation Tool</h1><br><br>
+<form action="http://localhost:5000/describe" enctype = "multipart/form-data">
+ <div class='radiobuttons'>
+  <label>
+    <input type="radio" class="option-input radio" name="desc" value="Info"/>
+    Info
+  </label>
+  <br><br><br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="desc" value="Shape"/>
+    Shape
+  </label><br><br><br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="desc" value="Columns"/>
+    Columns
+  </label><br><br><br><br>
+</div>
+ <div>
+        <input type="submit" name="submit" value="Submit">
+  </div>
+  <div>
+        <input type="submit" name="start" value="Start Data Analysis" style="margin-top: 30px;" formaction="/start">
+  </div>
+  </form>
+  <div class="result">
+    <pre>
+  {%- for data in result1 %}
+    {{data}}
+  {%- endfor %}
+    </pre>
+    <pre>
+      {{result2}}
+    </pre>
+    <pre>
+      {%- for data in result3 %}
+    {{data}}
+  {%- endfor %}
+    </pre>
+  </div>
+
+</body>
+</html>

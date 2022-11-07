@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+	<style type="text/css">
+		body{
+			background: rgb(247, 198, 240);
+		}
+		h1,h2{
+      text-align:center;
+      color: rgb(15, 14, 48);
+      margin-top: 60px;
+    }
+    *{font-family: 'Roboto', sans-serif;}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: rgb(145, 235, 56);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 1rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+.radiobuttons{
+  margin-left: 200px;
+}
+input[type=submit]{
+      background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 250px;
+      margin-top: 10px;
+    }
+    input[type=submit]:hover{
+      background-color: rgb(232, 152, 245);
+    }
+    .hide{
+    	display: none;
+    }
+    #oddiv{
+       margin-left: 500px;
+       margin-top: -300px;
+    }
+    #mvdiv{
+       margin-left: 500px;
+       margin-top: -365px;
+    }
+    #ttsdiv{
+    	margin-left: 600px;
+        margin-top: -175px;
+    }
+    input[type=number],input[type=text]{
+    	background-color: transparent;  
+        border-style: solid;  
+        border-width: 0px 0px 1px 0px;  
+        border-color: darkred; 
+        outline:0; 
+        width: 60px;
+    }
+    input[type=text]{
+    	width: 30%;
+    }
+    .result{
+      margin-left: 750px;
+      margin-top: -350px;
+    }
+    #ftsdiv{
+      margin-left: 750px;
+      margin-top: -240px;
+    }
+   select{
+    	
+        position: absolute;
+        background-color: transparent;  
+        border-style: solid;  
+        border-width: 0px 0px 1px 0px;  
+        border-color: darkred; 
+        outline:0; 
+        min-width: 160px;
+        z-index: 1;
+        max-height:200px;  
+        overflow-x:hidden; 
+        overflow-y:auto;
+    }
+    
+	</style>
+</head>
+<body>
+<h1>Data Science Automation Tool</h1>
+<h2 style="margin-top: 30px;">Exploratory Data Analysis</h2>
+
+<form action="http://localhost:5000/eda" enctype = "multipart/form-data">
+ <div class='radiobuttons'>
+  <label>
+    <input type="radio" class="option-input radio" name="eda" value="tc" onclick = "showtc()"/>
+    Type Conversion
+  </label>
+  <br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="eda" value="mv" onclick = "showmv()"/>
+    Missing values
+  </label><br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="eda" value="od" onclick = "showod()"/>
+    Outlier Detection
+  </label><br><br>
+  <label>
+    <input type="radio" class="option-input radio"  onclick = "showfts()"/>
+    Feature Transformations and Scaling
+  </label><br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="eda" value="tts" onclick="showtts()" />
+    Train - Test Split
+  </label><br><br>
+</div>
+
+ <div>
+    <input type="submit" name="submit" value="Submit">
+  </div> <br><br>
+
+  <div id="oddiv" class="hide">
+  <p>Choose one method</p>
+<input type="radio" value="sdm" name="eda">
+Remove outliers &nbsp;
+<input type="radio" value="irm" name="eda">
+Replace outliers with median
+</div>
+
+<div id="mvdiv" class="hide">
+  <p>Choose one method</p>
+<input type="radio" value="mvrm" name="eda">
+Drop missing value rows &nbsp;
+<input type="radio" value="mvcm" name="eda">
+Drop missing value columns &nbsp;
+<input type="radio" value="meanm" name="eda">
+Impute with mean &nbsp;
+<input type="radio" value="medianm" name="eda">
+Impute with median
+</div>
+
+<div id="ttsdiv" class="hide">
+	<p>Please give the following inputs</p>
+	<input type="number" name="train" placeholder="train %"> &nbsp;&nbsp;&nbsp;
+	<input type="number" name="test" placeholder="test %"> &nbsp;&nbsp;&nbsp;
+	<input type="text" name="target" placeholder="Enter target feature as in the dataset">
+</div>
+
+<div id="ftsdiv" class="hide">
+    <p>Choose one technique</p>
+    <select name="eda" id="fts">
+    	<option value="-">-</option>
+    	<option value="minmax">MinMax Scaler</option>
+        <option value="standard">Standard Scaler</option>
+        <option value="maxabs">MaxAbs Scaler</option>
+        <option value="robust">Robust Scaler</option>
+        <option value="quantile">Quantile Transformer Scaler</option>
+        <option value="log">Log Transformation</option>
+        <option value="power">Power Transformer Scaler</option>
+        <option value="unitvector">Unit Vector Scaler/Normalizer</option>
+        <option value="label">Label Encoding</option>
+        <option value="onehot">One Hot Encoding</option>
+    </select>
+</div>
+<div>
+        <input type="submit" name="startmb" value="Start Model Building" style="position: fixed;bottom: 30px;" formaction="/startmb">
+  </div>
+  </form>
+
+<script type="text/javascript">
+	
+function showod(){
+  document.getElementById('oddiv').style.display = 'block';
+  document.getElementById('mvdiv').style.display = 'none';
+  document.getElementById('ttsdiv').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('ftsdiv').style.display = 'none';
+}
+
+function showmv(){
+  document.getElementById('mvdiv').style.display = 'block';
+  document.getElementById('oddiv').style.display = 'none';
+  document.getElementById('ttsdiv').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('ftsdiv').style.display = 'none';
+}
+
+function showtts(){
+  document.getElementById('mvdiv').style.display = 'none';
+  document.getElementById('oddiv').style.display = 'none';
+  document.getElementById('ttsdiv').style.display = 'block';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('ftsdiv').style.display = 'none';
+}
+function showfts(){
+  document.getElementById('mvdiv').style.display = 'none';
+  document.getElementById('oddiv').style.display = 'none';
+  document.getElementById('ttsdiv').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('ftsdiv').style.display = 'block';
+}
+function showtc(){
+  document.getElementById('mvdiv').style.display = 'none';
+  document.getElementById('oddiv').style.display = 'none';
+  document.getElementById('ttsdiv').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('ftsdiv').style.display = 'none';
+}
+
+</script>
+ <div class="result" id='result'>
+    <pre>
+  {%- for data in result1 %}
+    {{data}}
+  {%- endfor %}
+    </pre>
+    <pre>
+      {{result}}
+    </pre>
+  </div>
+
+</body>
+</html>

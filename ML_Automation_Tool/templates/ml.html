@@ -1,0 +1,835 @@
+<html>
+<head>
+	<title>Welcome</title>
+	<style type="text/css">
+		body{
+			background: rgb(247, 198, 240);
+		}
+		h1,h2{
+			text-align:center;
+			color: rgb(15, 14, 48);
+			margin-top: 75px;
+		}
+		  *{font-family: 'Roboto', sans-serif;}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: rgb(145, 235, 56);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 1rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+.radiobuttons{
+  margin-left: 200px;
+}
+.hide{
+    	display: none;
+    }
+    #rdiv{
+       margin-left: 500px;
+       margin-top: -175px;
+    }
+    #cdiv{
+       margin-left: 500px;
+       margin-top: -100px;
+    }
+    #kdiv{
+       margin-left: 500px;
+       margin-top: -40px;
+    }
+    input[type=submit]{
+      background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 250px;
+            margin-top: 50px;
+    }
+    input[type=submit]:hover{
+      background-color: rgb(232, 152, 245);
+    }
+    .result{
+      margin-left: 750px;
+      margin-top: -250px;
+    }
+	</style>
+</head>
+<body>
+	<h1>Data Science Automation Tool</h1>
+	<h2 style="margin-top: 30px;">Machine Learning Model Application</h2> <br>
+	<form action="http://localhost:5000/mb" enctype = "multipart/form-data">
+    <p style="margin-left: 200px;">Choose a model technique</p>
+	<div class='radiobuttons'>
+  <label>
+    <input type="radio" class="option-input radio" name="r"  onclick = "showrdiv();hidediv()"/>
+    Regression
+  </label>
+  <br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="r"  onclick = "showcdiv();hidediv()"/>
+    Classification
+  </label><br><br>
+  <label>
+    <input type="radio" class="option-input radio" name="r" onclick = "showkdiv();hidediv()"/>
+    Clustering
+  </label><br><br>
+</div>
+
+<div id="rdiv" class="hide">
+	<select name="ml1" onchange="yesnoCheck(this);">
+		<option value="-">Choose a model</option>
+		<option value="linearregression">Linear Regression</option>
+		<option value="bridgeregression">Bayesian Ridge Regression</option>
+		<option value="randomforestregression">Random Forest Regression</option>
+		<option value="lassoregression">Lasso Regression</option>
+		<option value="ridgeregression">Ridge Regression</option>
+	</select>
+</div>
+
+<div id="cdiv" class="hide">
+	<select name="ml2" onchange="yesnoCheck(this);">
+		<option value="-">Choose a model</option>
+		<option value="logisticregression">Logistic Regression</option>
+		<option value="ridgeclassifier">Ridge Classifier</option>
+		<option value="sgradientboosting">Stochastic Gradient Boosting</option>
+		<option value="knnclassification">K-Nearest Neighbours</option>
+		<option value="decisiontrees">Decision Trees</option>
+		<option value="randomforest">Random Forest</option>
+		<option value="naivebayes">Naive Bayes</option>
+		<option value="supportvectormachines">Support Vector Machines</option>
+	</select>
+</div>
+
+<div id="kdiv" class="hide">
+	<select name="ml3" onchange="yesnoCheck(this);">
+		<option value="-">Choose a model</option>
+		<option value="kmeansclustering">K-Means Clustering</option>
+		<option value="ahc">Agglomerative Hierarchical Clustering</option>
+		<option value="dbscan">DBSCAN Clustering</option>
+		<option value="optics">OPTICS Clustering</option>
+		<option value="birch">BIRCH Clustering</option>
+	</select>
+</div>
+
+<input type="number" name="niter1" id="niter1" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter No.of Iterations">
+<input type="number" name="nestim1" id="nestim1" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter No.of Estimators">
+<input type="text" name="alpha" id="alpha" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter Alpha value">
+<div id="solver" class="hide" style="margin-left: 800px;margin-top: -20px;">
+	<select name="solver">
+		<option value="-">Choose a solver</option>
+		<option value="newton-cg">newton-cg</option>
+		<option value="lbfgs">lbfgs</option>
+		<option value="liblinear">liblinear</option>
+		<option value="sag">sag</option>
+		<option value="saga">saga</option>
+	</select>
+</div>
+<div id="penalty1" class="hide" style="margin-left: 950px;margin-top: -20px;">
+	<select name="penalty1">
+		<option value="-">Choose a penalty</option>
+		<option value="none">none</option>
+		<option value="l1">l1</option>
+		<option value="l2">l2</option>
+		<option value="elasticnet">elasticnet</option>
+	</select>
+</div>
+<div id="cparam1" class="hide" style="margin-left: 1100px;margin-top: -20px;">
+	<select name="cparam1">
+		<option value="-">Choose a C parameter</option>
+		<option value="100">100</option>
+		<option value="10">10</option>
+		<option value="1.0">1.0</option>
+		<option value="0.1">0.1</option>
+		<option value="0.01">0.01</option>
+	</select>
+</div>
+<div id="loss" class="hide" style="margin-left: 800px;margin-top: -20px;">
+	<select name="loss">
+		<option value="-">Choose a loss value</option>
+		<option value="hinge">hinge</option>
+		<option value="log">log</option>
+		<option value="modified_huber">modified_huber</option>
+		<option value="squared_hinge">squared_hinge</option>
+		<option value="perceptron">perceptron</option>
+	</select>
+</div>
+<div id="penalty2" class="hide" style="margin-left: 960px;margin-top: -20px;">
+	<select name="penalty2">
+		<option value="-">Choose a penalty</option>
+		<option value="l1">l1</option>
+		<option value="l2">l2</option>
+		<option value="elasticnet">elasticnet</option>
+	</select>
+</div>
+<input type="number" name="nneighbours" id="nneighbours" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter No. of neighbours">
+<div id="algorithm" class="hide" style="margin-left: 1000px;margin-top: -20px;">
+	<select name="algorithm">
+		<option value="-">Choose an algorithm</option>
+		<option value="ball_tree">ball_tree</option>
+		<option value="kd_tree">kd_tree</option>
+		<option value="brute">brute</option>
+		<option value="auto">auto</option>
+	</select>
+</div>
+<div id="criterion" class="hide" style="margin-left: 800px;margin-top: -20px;">
+	<select name="criterion">
+		<option value="-">Choose a criterion</option>
+		<option value="gini">gini</option>
+		<option value="entropy">entropy</option>
+	</select>
+</div>
+<input type="number" name="nestim2" id="nestim2" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter No.of Estimators">
+<div id="cparam2" class="hide" style="margin-left: 800px;margin-top: -20px;">
+	<select name="cparam2">
+		<option value="-">Choose a C parameter</option>
+		<option value="0.1">0.1</option>
+		<option value="1">1</option>
+		<option value="10">10</option>
+		<option value="100">100</option>
+		<option value="1000">1000</option>
+	</select>
+</div>
+<div id="gamma" class="hide" style="margin-left: 975px;margin-top: -20px;">
+	<select name="gamma">
+		<option value="-">Choose a gamma parameter</option>
+		<option value="scale">scale</option>
+		<option value="auto">auto</option>
+	</select>
+</div>
+<div id="kernel" class="hide" style="margin-left: 1185px;margin-top: -20px;">
+	<select name="kernel">
+		<option value="-">Choose a kernel</option>
+		<option value="linear">linear</option>
+		<option value="poly">poly</option>
+		<option value="rbf">rbf</option>
+		<option value="sigmoid">sigmoid</option>
+		<option value="precomputed">precomputed</option>
+	</select>
+</div>
+<input type="number" name="nclusters1" id="nclusters1" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter No. of clusters">
+<div id="algo" class="hide" style="margin-left: 1000px;margin-top: -20px;">
+	<select name="algo">
+		<option value="-">Choose an algorithm</option>
+		<option value="auto">auto</option>
+		<option value="full">full</option>
+		<option value="elkan">elkan</option>
+	</select>
+</div>
+<div id="linkage" class="hide" style="margin-left: 800px;margin-top: -20px;">
+	<select name="linkage">
+		<option value="-">Choose a linkage</option>
+		<option value="ward">ward</option>
+		<option value="complete">complete</option>
+		<option value="average">average</option>
+		<option value="single">single</option>
+	</select>
+</div>
+<div id="affinity" class="hide" style="margin-left: 950px;margin-top: -20px;">
+	<select name="affinity">
+		<option value="-">Choose an affinity</option>
+		<option value="euclidean">euclidean</option>
+		<option value="l1">l1</option>
+		<option value="l2">l2</option>
+		<option value="manhattan">manhattan</option>
+		<option value="cosine">cosine</option>
+		<option value="precomputed">precomputed</option>
+	</select>
+</div>
+<input type="number" name="nclusters2" id="nclusters2" class="hide" style="margin-left: 1100px;margin-top: -20px;" 
+placeholder="Enter No. of clusters">
+<input type="text" name="eps" id="eps" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter eps value">
+<input type="number" name="minsamples" id="minsamples" class="hide" style="margin-left: 985px;margin-top: -20px;" 
+placeholder="Enter minsamples value">
+<div id="alg" class="hide" style="margin-left: 1175px;margin-top: -20px;">
+	<select name="alg">
+		<option value="-">Choose an algorithm</option>
+		<option value="auto">auto</option>
+		<option value="ball_tree">ball_tree</option>
+		<option value="kd_tree">kd_tree</option>
+		<option value="brute">brute</option>
+	</select>
+</div>
+<input type="text" name="threshold" id="threshold" class="hide" style="margin-left: 800px;margin-top: -20px;" 
+placeholder="Enter threshold value">
+<input type="number" name="branchingfactor" id="branchingfactor" class="hide" style="margin-left: 985px;margin-top: -20px;" 
+placeholder="Enter branching factor">
+<input type="text" name="clusters" id="clusters" class="hide" style="margin-left: 1170px;margin-top: -20px;" 
+placeholder="Enter No. of clusters">
+
+<div>
+    <input type="submit" name="submit" value="Submit" style="position: fixed;bottom: 100px;">
+  </div>
+
+</form>
+<script type="text/javascript">
+	function showrdiv(){
+		document.getElementById('rdiv').style.display = 'block';
+        document.getElementById('cdiv').style.display = 'none';
+        document.getElementById('kdiv').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+	}
+	function showcdiv(){
+		document.getElementById('rdiv').style.display = 'none';
+        document.getElementById('cdiv').style.display = 'block';
+        document.getElementById('kdiv').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+	}
+	function showkdiv(){
+		document.getElementById('rdiv').style.display = 'none';
+        document.getElementById('cdiv').style.display = 'none';
+        document.getElementById('kdiv').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+	}
+	function yesnoCheck(that) {
+    if (that.value == "bridgeregression") {
+        document.getElementById("niter1").style.display = "block";
+        document.getElementById("nestim1").style.display = "none";
+        document.getElementById("alpha").style.display = "none";
+        document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    } 
+    else if (that.value == "randomforestregression") {
+        document.getElementById("nestim1").style.display = "block";
+        document.getElementById("niter1").style.display = "none";
+        document.getElementById("alpha").style.display = "none";
+        document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    } 
+    else if (that.value == "lassoregression" || that.value == "ridgeregression" || that.value == "ridgeclassifier") {
+    	document.getElementById("alpha").style.display = "block";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "logisticregression"){
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "block";
+    	document.getElementById("penalty1").style.display = "block";
+    	document.getElementById("cparam1").style.display = "block";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "sgradientboosting") {
+        document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "block";
+    	document.getElementById("penalty2").style.display = "block";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "knnclassification") {
+        document.getElementById("nneighbours").style.display = "block";
+        document.getElementById("algorithm").style.display = "block";
+        document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("criterion").style.display = "none";
+    	document.getElementById("nestim2").style.display = "none";
+    	document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "decisiontrees") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "block";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "randomforest"){
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "block";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "supportvectormachines") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "block";
+        document.getElementById("gamma").style.display = "block";
+        document.getElementById("kernel").style.display = "block";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "kmeansclustering"){
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "block";
+        document.getElementById("algo").style.display = "block";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "ahc") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "block";
+        document.getElementById("affinity").style.display = "block";
+        document.getElementById("nclusters2").style.display = "block";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "dbscan") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "block";
+        document.getElementById("minsamples").style.display = "block";
+        document.getElementById("alg").style.display = "block";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "optics") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "block";
+        document.getElementById("alg").style.display = "block";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+    else if (that.value == "birch") {
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "block";
+        document.getElementById("branchingfactor").style.display = "block";
+        document.getElementById("clusters").style.display = "block";
+        document.getElementById('result').style.display = 'none';
+    }
+    else{
+    	document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+    }
+}
+function hidediv(){
+	    document.getElementById("alpha").style.display = "none";
+    	document.getElementById("niter1").style.display = "none";
+    	document.getElementById("nestim1").style.display = "none";
+    	document.getElementById("solver").style.display = "none";
+    	document.getElementById("penalty1").style.display = "none";
+    	document.getElementById("cparam1").style.display = "none";
+    	document.getElementById("loss").style.display = "none";
+    	document.getElementById("penalty2").style.display = "none";
+    	document.getElementById("nneighbours").style.display = "none";
+        document.getElementById("algorithm").style.display = "none";
+        document.getElementById("criterion").style.display = "none";
+        document.getElementById("nestim2").style.display = "none";
+        document.getElementById("cparam2").style.display = "none";
+        document.getElementById("gamma").style.display = "none";
+        document.getElementById("kernel").style.display = "none";
+        document.getElementById("nclusters1").style.display = "none";
+        document.getElementById("algo").style.display = "none";
+        document.getElementById("linkage").style.display = "none";
+        document.getElementById("affinity").style.display = "none";
+        document.getElementById("nclusters2").style.display = "none";
+        document.getElementById("eps").style.display = "none";
+        document.getElementById("minsamples").style.display = "none";
+        document.getElementById("alg").style.display = "none";
+        document.getElementById("threshold").style.display = "none";
+        document.getElementById("branchingfactor").style.display = "none";
+        document.getElementById("clusters").style.display = "none";
+        document.getElementById('result').style.display = 'none';
+}
+</script>
+ <div class="result" id='result'>
+    <pre>
+  {%- for data in result1 %}
+    {{data}}
+  {%- endfor %}
+    </pre>
+    <pre>
+      {{result}}
+    </pre>
+  </div>
+</body>
+</html>
